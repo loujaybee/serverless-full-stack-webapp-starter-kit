@@ -51,3 +51,19 @@ The litmus test for any PR: "After this merges, will a developer who copies the 
 ### Architecture Decision Records (ADR)
 
 ADRs are not used yet. Introduce `design/adr/` when a major technology decision is made (e.g., ORM migration, database engine change) that requires recording the context, alternatives considered, and rationale.
+
+### Migration guides
+
+When a breaking change is introduced, write a migration guide alongside the ADR. Place it in `docs/migration/` (e.g., `docs/migration/v3-migration-prompt.md`).
+
+A migration guide is not a complete step-by-step procedure for users. It is an input for an AI coding agent — a meta-prompt that the agent reads, compares against the user's codebase, and uses to build a project-specific migration plan. Write it with that consumer in mind: describe what changed, why, and what patterns in user code are affected, rather than prescribing exact commands.
+
+To surface the guide in release notes, include a link in the `BREAKING CHANGE:` commit footer:
+
+```
+feat!: replace ORM from Prisma to Drizzle
+
+BREAKING CHANGE: ORM has been replaced. See [migration guide](docs/migration/v3-migration-prompt.md) for details.
+```
+
+release-please will carry this into the Breaking Changes section of the GitHub Release.
