@@ -723,7 +723,7 @@ exports[`Snapshot test 2`] = `
               ],
             },
             "DATABASE_NAME": "main",
-            "DATABASE_OPTION": "?pool_timeout=20&connect_timeout=20",
+            "DATABASE_OPTION": "?connection_limit=1&connect_timeout=30",
             "DATABASE_PASSWORD": {
               "Fn::Join": [
                 "",
@@ -772,7 +772,7 @@ exports[`Snapshot test 2`] = `
                       "Endpoint.Port",
                     ],
                   },
-                  "/main?pool_timeout=20&connect_timeout=20",
+                  "/main?connection_limit=1&connect_timeout=30",
                 ],
               ],
             },
@@ -3575,7 +3575,7 @@ async function handler(event) {
               ],
             },
             "DATABASE_NAME": "main",
-            "DATABASE_OPTION": "?pool_timeout=20&connect_timeout=20",
+            "DATABASE_OPTION": "?connection_limit=1&connect_timeout=30",
             "DATABASE_PASSWORD": {
               "Fn::Join": [
                 "",
@@ -3624,7 +3624,7 @@ async function handler(event) {
                       "Endpoint.Port",
                     ],
                   },
-                  "/main?pool_timeout=20&connect_timeout=20",
+                  "/main?connection_limit=1&connect_timeout=30",
                 ],
               ],
             },
@@ -3952,7 +3952,7 @@ async function handler(event) {
               ],
             },
             "DATABASE_NAME": "main",
-            "DATABASE_OPTION": "?pool_timeout=20&connect_timeout=20",
+            "DATABASE_OPTION": "?connection_limit=1&connect_timeout=30",
             "DATABASE_PASSWORD": {
               "Fn::Join": [
                 "",
@@ -4001,7 +4001,7 @@ async function handler(event) {
                       "Endpoint.Port",
                     ],
                   },
-                  "/main?pool_timeout=20&connect_timeout=20",
+                  "/main?connection_limit=1&connect_timeout=30",
                 ],
               ],
             },
