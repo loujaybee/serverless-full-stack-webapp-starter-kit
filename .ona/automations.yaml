@@ -1,4 +1,13 @@
 tasks:
+  open-ports:
+    name: Open ports
+    description: Expose ports in the Ona sidebar.
+    command: |
+      ona environment port open 3010 --label "Next.js Dev Server"
+      ona environment port open 5432 --label "PostgreSQL"
+    triggeredBy:
+      - postDevcontainerStart
+
   install-deps:
     name: Install dependencies
     description: Install npm dependencies for webapp and cdk packages.
