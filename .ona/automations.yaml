@@ -73,5 +73,10 @@ services:
         if [ ! -f webapp/.env.local ]; then
           cp webapp/.env.local.example webapp/.env.local
         fi
+        # Wait for db-push to finish (User table is created by prisma db push).
+        until docker compose exec -T postgres psql -U root -d sample -c "\dt User" 2>/dev/null | grep -q User; do
+          echo "Waiting for database schema..."
+          sleep 2
+        done
         cd webapp && npm run dev
       ready: curl -sf -o /dev/null http://localhost:3010
