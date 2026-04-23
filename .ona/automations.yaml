@@ -1,0 +1,35 @@
+tasks:
+  install-deps:
+    name: Install dependencies
+    description: Install npm dependencies for webapp and cdk packages.
+    command: |
+      cd webapp && npm ci
+      cd ../cdk && npm ci
+    triggeredBy:
+      - postDevcontainerStart
+
+  db-push:
+    name: Sync database schema
+    description: Push Prisma schema to local PostgreSQL.
+    command: |
+      cd webapp && npx prisma db push
+    triggeredBy:
+      - postDevcontainerStart
+    dependsOn:
+      - install-deps
+
+services:
+  postgres:
+    name: PostgreSQL
+    description: Local PostgreSQL database via Docker Compose.
+    commands:
+      start: docker compose up -d
+      ready: docker compose exec -T postgres pg_isready -U root
+      stop: docker compose down
+
+  webapp:
+    name: Next.js Dev Server
+    description: Next.js development server on port 3010.
+    commands:
+      start: cd webapp && npm run dev
+      ready: curl -sf http://localhost:3010/api/health

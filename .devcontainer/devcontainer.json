@@ -1,0 +1,21 @@
+{
+	"name": "Serverless Full Stack Webapp",
+	"image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+	"features": {
+		"ghcr.io/devcontainers/features/node": {
+			"version": "20"
+		},
+		"ghcr.io/devcontainers/features/docker-in-docker": {}
+	},
+	"forwardPorts": [3010, 5432],
+	"portsAttributes": {
+		"3010": {
+			"label": "Next.js Dev Server",
+			"onAutoForward": "openPreview"
+		},
+		"5432": {
+			"label": "PostgreSQL",
+			"onAutoForward": "silent"
+		}
+	}
+}
