@@ -32,7 +32,7 @@ services:
     name: PostgreSQL
     description: Local PostgreSQL database via Docker Compose.
     commands:
-      start: docker compose up -d
+      start: docker compose up --wait && docker compose logs -f postgres
       ready: docker compose exec -T postgres pg_isready -U root
       stop: docker compose down
 
@@ -46,4 +46,4 @@ services:
           sleep 2
         done
         cd webapp && npm run dev
-      ready: curl -sf http://localhost:3010/api/health
+      ready: curl -sf -o /dev/null http://localhost:3010
