@@ -39,21 +39,42 @@ Either way works. Your facilitator will share the URL during the session.
 
 ## What you'll do
 
-1. **Explore & design (20 min)** — Open the repo in Ona (you'll be
+1. **Intro (5 min, facilitator-led)** — quick orientation before you
+   dive in. See the [facilitator agenda](#facilitator-agenda-intro-phase)
+   below.
+2. **Explore & design (15 min)** — Open the repo in Ona (you'll be
    invited to the workshop org) and use an **Ona agent** to walk you
    through the codebase. Ask it: *"What does this app do? Where's the
    pain? What would you automate?"* Pick one pain and fill in the canvas
    below. A facilitator will poke holes in your design before you build.
-2. **Build (20 min)** — Turn the design into a working automation in
+3. **Build (20 min)** — Turn the design into a working automation in
    Ona. Run it. Iterate.
-3. **Share (15 min)** — Each team takes a couple of minutes to the room:
+4. **Share (15 min)** — Each team takes a couple of minutes to the room:
    - What pain were you solving?
    - What did you build?
    - Did it work?
    - **What limitations or challenges did you hit?** ← the important one
-4. **Debrief (5 min)** — Patterns across teams. What's Ona good at?
+5. **Debrief (5 min)** — Patterns across teams. What's Ona good at?
    What's missing? What would you want to tell your customers? What
    would you want the industry to build next?
+
+### Facilitator agenda (intro phase)
+
+Keep this tight — 5 minutes total. Four beats:
+
+1. **Run an agent in an environment** — live demo. Open the repo in
+   Ona, fire up an agent, ask it something real about the codebase. The
+   point is to show what "agent in your dev environment" actually looks
+   like, not to solve a problem.
+2. **What is an automation** — show one in the dashboard. Trigger →
+   Prompt → Report. Distinguish it from tasks & services (covered in
+   [`ONA_OVERVIEW.md` §3–4](ONA_OVERVIEW.md#3-tasks--services-onaautomationsyaml)).
+3. **Walk through the plan** — this file. Canvas-first, build-second.
+   Flag that limitations are as valuable as wins.
+4. **Cheat sheet & scope** — point at [`ONA_OVERVIEW.md`](ONA_OVERVIEW.md)
+   as the reference material, especially the [CLI cheat sheet](ONA_OVERVIEW.md#appendix-a--cli-cheat-sheet)
+   and the [one-hour fits/timebox table](ONA_OVERVIEW.md#if-youre-here-for-a-one-hour-workshop).
+   Tell them which areas are quagmires so they don't walk into one.
 
 ## Before the session
 

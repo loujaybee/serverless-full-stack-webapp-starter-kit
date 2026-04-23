@@ -1,6 +1,6 @@
-# Ona on AWS — Workshop Guide
+# Ona on AWS — Overview
 
-A practical guide to the main aspects and components of Ona for a technical audience. Each section includes the docs to read, commands to run, and YAML you can copy.
+A practical tour of the main aspects and components of Ona for a technical audience. Each section includes the docs to read, commands to run, and YAML you can copy. Written with a one-hour workshop in mind but useful as a general primer — see [Appendix D](#appendix-d--what-fits-in-a-one-hour-workshop) for what fits in a session and what to leave for later.
 
 > **Note on naming.** The CLI is `ona`. Inside an environment, runtime variables still use the `GITPOD_` prefix (e.g., `GITPOD_ENVIRONMENT_ID`) for backward compatibility.
 
@@ -179,6 +179,22 @@ A quick index so you know what exists before you go looking. Each row links to t
 | **First-party integrations** | Ona dashboard → Org Settings → Integrations | Linear, Sentry, Atlassian, Notion, Granola | §7.2 |
 | **Skills** | Org-level via dashboard | Reusable prompts agents discover; available as `/slash` commands | §7.3 |
 | **Runners** | Ona dashboard + AWS account | The AWS account/region where environments execute | §6 |
+
+### If you're here for a one-hour workshop
+
+Some parts of Ona land cleanly in 60 minutes. Others are rabbit holes. Not a ban — just a heads-up.
+
+| Fits the hour | Timebox it |
+|---|---|
+| Dev container tweaks (§2) | OIDC for AWS (§5.2) |
+| `automations.yaml` edits (§3) | Secrets wiring & external integrations (§5.1) |
+| Automations in the UI (§4) | Custom MCP servers (§7.1) |
+| The preconfigured project as-is (§1) | Slack / PR-based human-in-the-loop (§6) |
+| Manual, scheduled & PR triggers (§4) | Private container registry auth (§5.1) |
+| Raising work into git / PRs | |
+| Report steps to existing integrations (§4) | |
+
+Rule of thumb: if it needs IAM, webhooks, or credentials from outside Ona, leave it for after the workshop.
 
 ### Read first
 
