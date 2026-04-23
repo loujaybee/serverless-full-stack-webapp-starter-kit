@@ -17,6 +17,22 @@ tasks:
     triggeredBy:
       - postDevcontainerStart
 
+  bootstrap-env:
+    name: Bootstrap webapp .env.local
+    description: |
+      Seed webapp/.env.local from .env.local.example so the app runs in
+      LOCAL_DEV_MODE (auth bypassed, AWS calls stubbed) without requiring
+      any external dependencies.
+    command: |
+      if [ ! -f webapp/.env.local ]; then
+        cp webapp/.env.local.example webapp/.env.local
+        echo "Created webapp/.env.local from example (LOCAL_DEV_MODE=true)."
+      else
+        echo "webapp/.env.local already exists; leaving as-is."
+      fi
+    triggeredBy:
+      - postDevcontainerStart
+
   db-push:
     name: Sync database schema
     description: Push Prisma schema to local PostgreSQL.
@@ -53,5 +69,9 @@ services:
           echo "Waiting for node_modules..."
           sleep 2
         done
+        # Ensure .env.local exists in case bootstrap-env hasn't run yet.
+        if [ ! -f webapp/.env.local ]; then
+          cp webapp/.env.local.example webapp/.env.local
+        fi
         cd webapp && npm run dev
       ready: curl -sf -o /dev/null http://localhost:3010
