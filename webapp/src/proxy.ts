@@ -2,9 +2,16 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import { fetchAuthSession } from 'aws-amplify/auth/server';
 import { runWithAmplifyServerContext } from '@/lib/amplifyServerUtils';
+import { isLocalDevMode } from '@/lib/local-dev';
 
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();
+
+  // In local dev mode auth is bypassed entirely so the app can be explored
+  // without Cognito configured.
+  if (isLocalDevMode()) {
+    return response;
+  }
 
   const authenticated = await runWithAmplifyServerContext({
     nextServerContext: { request, response },

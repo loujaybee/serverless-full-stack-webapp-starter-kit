@@ -2,11 +2,17 @@ import { SignatureV4 } from '@smithy/signature-v4';
 import { defaultProvider } from '@aws-sdk/credential-provider-node';
 import { HttpRequest } from '@smithy/protocol-http';
 import { Sha256 } from '@aws-crypto/sha256-js';
+import { isLocalDevMode } from '@/lib/local-dev';
 
 const httpEndpoint = process.env.EVENT_HTTP_ENDPOINT!;
 const region = process.env.AWS_REGION!;
 
 export async function sendEvent(channelName: string, payload: unknown) {
+  if (isLocalDevMode()) {
+    console.log(`[local-dev] sendEvent skipped: channel=${channelName}`, payload);
+    return;
+  }
+
   if (httpEndpoint == null) {
     console.log(`event api is not configured!`);
     return;

@@ -3,6 +3,7 @@ import { cookies } from 'next/headers';
 import { fetchAuthSession } from 'aws-amplify/auth/server';
 import { runWithAmplifyServerContext } from '@/lib/amplifyServerUtils';
 import { prisma } from '@/lib/prisma';
+import { isLocalDevMode, LOCAL_DEV_USER_EMAIL, LOCAL_DEV_USER_ID } from '@/lib/local-dev';
 
 /**
  * Get the authenticated session without DB access.
@@ -10,6 +11,14 @@ import { prisma } from '@/lib/prisma';
  * Memoized per request via React cache().
  */
 export const getAuthSession = cache(async () => {
+  if (isLocalDevMode()) {
+    return {
+      userId: LOCAL_DEV_USER_ID,
+      email: LOCAL_DEV_USER_EMAIL,
+      accessToken: 'local-dev-access-token',
+    };
+  }
+
   const session = await runWithAmplifyServerContext({
     nextServerContext: { cookies },
     operation: (contextSpec) => fetchAuthSession(contextSpec),
@@ -46,6 +55,15 @@ export async function tryGetAuthSession() {
  */
 export const getSessionWithUser = cache(async () => {
   const auth = await getAuthSession();
+  if (isLocalDevMode()) {
+    // Auto-seed the dev user so the app is usable straight after `npm run dev`.
+    const user = await prisma.user.upsert({
+      where: { id: auth.userId },
+      update: {},
+      create: { id: auth.userId },
+    });
+    return { ...auth, user };
+  }
   const user = await prisma.user.findUnique({ where: { id: auth.userId } });
   if (user == null) {
     throw new UserNotFoundError(auth.userId);

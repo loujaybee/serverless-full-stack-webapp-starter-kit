@@ -11,18 +11,27 @@ if (process.env.AMPLIFY_APP_ORIGIN_SOURCE_PARAMETER) {
   }
 }
 
+// In local dev mode the Cognito env vars are typically unset. Fall back to
+// harmless placeholders so module evaluation doesn't blow up; the actual
+// Amplify runtime is never invoked because callers short-circuit on
+// isLocalDevMode().
+const userPoolId = process.env.USER_POOL_ID ?? 'us-east-1_localdev';
+const userPoolClientId = process.env.USER_POOL_CLIENT_ID ?? 'localdev';
+const appOrigin = process.env.AMPLIFY_APP_ORIGIN ?? 'http://localhost:3010';
+const cognitoDomain = process.env.COGNITO_DOMAIN ?? 'localdev.example.com';
+
 export const { runWithAmplifyServerContext, createAuthRouteHandlers } = createServerRunner({
   config: {
     Auth: {
       Cognito: {
-        userPoolId: process.env.USER_POOL_ID!,
-        userPoolClientId: process.env.USER_POOL_CLIENT_ID!,
+        userPoolId,
+        userPoolClientId,
         loginWith: {
           oauth: {
-            redirectSignIn: [`${process.env.AMPLIFY_APP_ORIGIN!}/api/auth/sign-in-callback`],
-            redirectSignOut: [`${process.env.AMPLIFY_APP_ORIGIN!}/api/auth/sign-out-callback`],
+            redirectSignIn: [`${appOrigin}/api/auth/sign-in-callback`],
+            redirectSignOut: [`${appOrigin}/api/auth/sign-out-callback`],
             responseType: 'code',
-            domain: process.env.COGNITO_DOMAIN!,
+            domain: cognitoDomain,
             scopes: ['profile', 'openid', 'aws.cognito.signin.user.admin'],
           },
         },
