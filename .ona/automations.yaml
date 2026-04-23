@@ -21,6 +21,10 @@ tasks:
     name: Sync database schema
     description: Push Prisma schema to local PostgreSQL.
     command: |
+      until docker compose exec -T postgres pg_isready -U root; do
+        echo "Waiting for postgres..."
+        sleep 2
+      done
       cd webapp && npx prisma db push
     triggeredBy:
       - postDevcontainerStart
@@ -31,6 +35,8 @@ services:
   postgres:
     name: PostgreSQL
     description: Local PostgreSQL database via Docker Compose.
+    triggeredBy:
+      - postDevcontainerStart
     commands:
       start: docker compose up --wait && docker compose logs -f postgres
       ready: docker compose exec -T postgres pg_isready -U root
@@ -39,6 +45,8 @@ services:
   webapp:
     name: Next.js Dev Server
     description: Next.js development server on port 3010.
+    triggeredBy:
+      - postDevcontainerStart
     commands:
       start: |
         until [ -d webapp/node_modules ]; do
