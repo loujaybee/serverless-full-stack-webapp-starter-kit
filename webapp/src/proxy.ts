@@ -4,6 +4,11 @@ import { fetchAuthSession } from 'aws-amplify/auth/server';
 import { runWithAmplifyServerContext } from '@/lib/amplifyServerUtils';
 
 export async function proxy(request: NextRequest) {
+  // DEV_MODE: skip Cognito auth check entirely
+  if (process.env.DEV_MODE === 'true') {
+    return NextResponse.next();
+  }
+
   const response = NextResponse.next();
 
   const authenticated = await runWithAmplifyServerContext({
