@@ -190,8 +190,8 @@ Some parts of Ona land cleanly in 60 minutes. Others are rabbit holes. Not a ban
 | `automations.yaml` edits (§3) | Secrets wiring & external integrations (§5.1) |
 | Automations in the UI (§4) | Custom MCP servers (§7.1) |
 | The preconfigured project as-is (§1) | Slack / PR-based human-in-the-loop (§6) |
-| Manual & scheduled triggers (§4) | PR-triggered Automations (§4, needs webhooks + Enterprise) |
-| Raising work into git / PRs | Private container registry auth (§5.1) |
+| Manual, scheduled & PR triggers (§4) | Private container registry auth (§5.1) |
+| Raising work into git / PRs | |
 | Report steps to existing integrations (§4) | |
 
 Rule of thumb: if it needs IAM, webhooks, or credentials from outside Ona, leave it for after the workshop.
