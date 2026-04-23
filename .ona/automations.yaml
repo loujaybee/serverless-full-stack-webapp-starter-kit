@@ -3,8 +3,8 @@ tasks:
     name: Open ports
     description: Expose ports in the Ona sidebar.
     command: |
-      ona environment port open 3010 --label "Next.js Dev Server"
-      ona environment port open 5432 --label "PostgreSQL"
+      ona environment port open 3010 --name "Next.js Dev Server"
+      ona environment port open 5432 --name "PostgreSQL"
     triggeredBy:
       - postDevcontainerStart
 
