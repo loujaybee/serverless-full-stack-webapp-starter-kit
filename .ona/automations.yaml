@@ -74,7 +74,8 @@ services:
           cp webapp/.env.local.example webapp/.env.local
         fi
         # Wait for db-push to finish (User table is created by prisma db push).
-        until docker compose exec -T postgres psql -U root -d sample -c "\dt User" 2>/dev/null | grep -q User; do
+        # \dt lowercases unquoted identifiers, so "User" is never matched; use to_regclass instead.
+        until docker compose exec -T postgres psql -U root -d sample -tAc "SELECT to_regclass('public.\"User\"')" 2>/dev/null | grep -q '"User"'; do
           echo "Waiting for database schema..."
           sleep 2
         done
