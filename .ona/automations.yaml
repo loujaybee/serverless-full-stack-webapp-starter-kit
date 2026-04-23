@@ -13,7 +13,7 @@ tasks:
     description: Install npm dependencies for webapp and cdk packages.
     command: |
       cd webapp && npm ci
-      cd ../cdk && npm ci
+      cd ../cdk && rm -rf node_modules && npm ci
     triggeredBy:
       - postDevcontainerStart
 
@@ -49,7 +49,7 @@ services:
       - postDevcontainerStart
     commands:
       start: |
-        until [ -d webapp/node_modules ]; do
+        until [ -f webapp/node_modules/.bin/next ]; do
           echo "Waiting for node_modules..."
           sleep 2
         done
