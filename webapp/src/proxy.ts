@@ -6,6 +6,11 @@ import { runWithAmplifyServerContext } from '@/lib/amplifyServerUtils';
 export async function proxy(request: NextRequest) {
   const response = NextResponse.next();
 
+  // DEV_MODE bypasses Cognito entirely — all requests are treated as authenticated.
+  if (process.env.DEV_MODE === 'true') {
+    return response;
+  }
+
   const authenticated = await runWithAmplifyServerContext({
     nextServerContext: { request, response },
     operation: async (contextSpec) => {

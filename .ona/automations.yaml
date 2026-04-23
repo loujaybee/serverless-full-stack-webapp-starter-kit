@@ -53,5 +53,5 @@ services:
           echo "Waiting for node_modules..."
           sleep 2
         done
-        cd webapp && npm run dev
+        cd webapp && DEV_MODE=true npm run dev
       ready: curl -sf -o /dev/null http://localhost:3010
