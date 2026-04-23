@@ -4,12 +4,18 @@ import { fetchAuthSession } from 'aws-amplify/auth/server';
 import { runWithAmplifyServerContext } from '@/lib/amplifyServerUtils';
 import { prisma } from '@/lib/prisma';
 
+// Fixed identity used when DEV_MODE=true. Not a real user — local dev only.
+export const DEV_USER_ID = 'dev-user';
+const DEV_SESSION = { userId: DEV_USER_ID, email: 'dev@local', accessToken: 'dev-token' };
+
 /**
  * Get the authenticated session without DB access.
  * Use when only userId/email/accessToken is needed.
  * Memoized per request via React cache().
  */
 export const getAuthSession = cache(async () => {
+  if (process.env.DEV_MODE === 'true') return DEV_SESSION;
+
   const session = await runWithAmplifyServerContext({
     nextServerContext: { cookies },
     operation: (contextSpec) => fetchAuthSession(contextSpec),
@@ -46,6 +52,17 @@ export async function tryGetAuthSession() {
  */
 export const getSessionWithUser = cache(async () => {
   const auth = await getAuthSession();
+
+  if (process.env.DEV_MODE === 'true') {
+    // Upsert the dev user so actions have a valid FK target.
+    const user = await prisma.user.upsert({
+      where: { id: DEV_USER_ID },
+      create: { id: DEV_USER_ID },
+      update: {},
+    });
+    return { ...auth, user };
+  }
+
   const user = await prisma.user.findUnique({ where: { id: auth.userId } });
   if (user == null) {
     throw new UserNotFoundError(auth.userId);

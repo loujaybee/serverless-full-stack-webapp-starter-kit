@@ -3,6 +3,10 @@ import { tryGetAuthSession } from '@/lib/auth';
 
 export async function GET() {
   try {
+    if (process.env.DEV_MODE === 'true') {
+      return NextResponse.json({ accessToken: 'dev-token' });
+    }
+
     const session = await tryGetAuthSession();
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

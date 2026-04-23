@@ -12,6 +12,11 @@ tasks:
     name: Install dependencies
     description: Install npm dependencies for webapp and cdk packages.
     command: |
+      # Bootstrap .env.local with DEV_MODE=true if not already present.
+      if [ ! -f webapp/.env.local ]; then
+        cp webapp/.env.local.example webapp/.env.local
+        sed -i 's/^DEV_MODE=false/DEV_MODE=true/' webapp/.env.local
+      fi
       cd webapp && npm ci
       cd ../cdk && rm -rf node_modules && npm ci
     triggeredBy:
