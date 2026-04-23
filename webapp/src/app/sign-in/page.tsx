@@ -1,4 +1,14 @@
+import { redirect } from 'next/navigation';
+
+const DEV_MODE = process.env.DEV_MODE === 'true';
+
 export default function SignInPage() {
+  // In dev mode auth is bypassed — the sign-in page is unreachable via the
+  // proxy, but redirect here just in case someone navigates directly.
+  if (DEV_MODE) {
+    redirect('/');
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
