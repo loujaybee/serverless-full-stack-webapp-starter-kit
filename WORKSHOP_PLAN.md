@@ -72,8 +72,8 @@ Keep this tight — 5 minutes total. Four beats:
 3. **Walk through the plan** — this file. Canvas-first, build-second.
    Flag that limitations are as valuable as wins.
 4. **Cheat sheet & scope** — point at [`ONA_OVERVIEW.md`](ONA_OVERVIEW.md)
-   as the reference material, especially [Appendix A (CLI cheat sheet)](ONA_OVERVIEW.md#appendix-a--cli-cheat-sheet)
-   and [Appendix D (what fits in an hour)](ONA_OVERVIEW.md#appendix-d--what-fits-in-a-one-hour-workshop).
+   as the reference material, especially the [CLI cheat sheet](ONA_OVERVIEW.md#appendix-a--cli-cheat-sheet)
+   and the [one-hour fits/timebox table](ONA_OVERVIEW.md#if-youre-here-for-a-one-hour-workshop).
    Tell them which areas are quagmires so they don't walk into one.
 
 ## Before the session

@@ -49,7 +49,6 @@ A practical tour of the main aspects and components of Ona for a technical audie
 - [Appendix A — CLI cheat sheet](#appendix-a--cli-cheat-sheet)
 - [Appendix B — Troubleshooting quick reference](#appendix-b--troubleshooting-quick-reference)
 - [Appendix C — Where to go next](#appendix-c--where-to-go-next)
-- [Appendix D — What fits in a one-hour workshop](#appendix-d--what-fits-in-a-one-hour-workshop)
 
 ---
 
@@ -180,6 +179,22 @@ A quick index so you know what exists before you go looking. Each row links to t
 | **First-party integrations** | Ona dashboard → Org Settings → Integrations | Linear, Sentry, Atlassian, Notion, Granola | §7.2 |
 | **Skills** | Org-level via dashboard | Reusable prompts agents discover; available as `/slash` commands | §7.3 |
 | **Runners** | Ona dashboard + AWS account | The AWS account/region where environments execute | §6 |
+
+### If you're here for a one-hour workshop
+
+Some parts of Ona land cleanly in 60 minutes. Others are rabbit holes. Not a ban — just a heads-up.
+
+| Fits the hour | Timebox it |
+|---|---|
+| Dev container tweaks (§2) | OIDC for AWS (§5.2) |
+| `automations.yaml` edits (§3) | Secrets wiring & external integrations (§5.1) |
+| Automations in the UI (§4) | Custom MCP servers (§7.1) |
+| The preconfigured project as-is (§1) | Slack / PR-based human-in-the-loop (§6) |
+| Manual & scheduled triggers (§4) | PR-triggered Automations (§4, needs webhooks + Enterprise) |
+| Raising work into git / PRs | Private container registry auth (§5.1) |
+| Report steps to existing integrations (§4) | |
+
+Rule of thumb: if it needs IAM, webhooks, or credentials from outside Ona, leave it for after the workshop.
 
 ### Read first
 
@@ -985,49 +1000,4 @@ ona audit-logs list
 - [Best practices](https://ona.com/docs/ona/best-practices)
 - [Skills](https://ona.com/docs/ona/skills)
 - [SDK](https://ona.com/docs/ona/integrations/sdk)
-
-## Appendix D — What fits in a one-hour workshop
-
-Not to discourage anything — Ona is a big product. But some features
-land cleanly in a 60-minute session; others are rabbit holes that will
-eat your time budget. If you're here for a workshop, here's a rough
-guide on where to spend your energy.
-
-### Fits well — stay here first
-
-These areas are scoped, visible in the UI, and don't require credentials
-or external systems to work. You can design, build, and debug an
-automation entirely within these boundaries.
-
-| Area | Why it fits | See |
-|---|---|---|
-| **Dev container adjustments** | The repo already has a working `devcontainer.json`. You can tweak tools, add features, rebuild, and verify — fast feedback loop. | §2 |
-| **Tasks & services in `.ona/automations.yaml`** | Code-as-config inside the repo. Edit, `ona automations update`, and your changes are live in the environment. | §3 |
-| **Automations in the Ona UI** | Point-and-click: pick a trigger, write a prompt, add a Report step, run it. Everything observable in the dashboard. | §4 |
-| **Working with the preconfigured project** | The workshop fork already has a project, dev container, and `automations.yaml`. No setup tax — you're focused on automation design, not plumbing. | §1, §3 |
-| **Raising work into git / opening PRs** | Ona environments come pre-authenticated with the git host for the project's repo. Agents can branch, commit, and open PRs out of the box. | §4, §6 |
-| **Manual and scheduled triggers** | Both work on every plan and don't need webhooks. | §4 |
-| **Report steps (PR comment, Slack, Linear)** | For anything already wired into your org's workspace, this is a single dropdown. | §4 |
-
-### Quagmires — look if you have time, but timebox hard
-
-These are all legitimate and worth exploring eventually. In a workshop,
-each one can consume your remaining 40 minutes if you're not careful.
-Tell your facilitator before you start one so they can give you a
-five-minute warning.
-
-| Area | Why it eats time | See |
-|---|---|---|
-| **OIDC for AWS access** | Requires IAM provider setup, a role, a trust policy with the right `sub` claim, and a round of `ona idp token --decode` debugging. Enterprise-plan only. Worth doing — just not for a first automation. | §5.2 |
-| **Secrets provisioning & external integrations** | Creating the secret is fast; wiring it through to the right scope (user/project/org), confirming it's mounted correctly, and troubleshooting precedence eats time. | §5.1 |
-| **MCP server configuration** | Custom MCP servers need a working config, correct auth, and round-tripping with the agent to verify the tool is actually exposed. Well-supported first-party MCPs are quicker — bespoke ones rarely are. | §7.1 |
-| **Human-in-the-loop via Slack / PR-based approval flows** | The pieces exist (Report steps, webhooks, PR triggers), but composing them into a reliable HITL checkpoint has a lot of moving parts. | §6 |
-| **PR-triggered Automations** | Requires webhooks and Enterprise plan; debugging "why didn't it fire" takes a minute you probably don't have. | §4 |
-| **Pull-from-private-registry** | Works — but if the credential isn't right, your environment fails to build and now you're debugging registry auth instead of automation design. | §5.1 |
-
-### Rule of thumb
-
-If a feature requires IAM, webhooks, or credentials from outside Ona,
-leave it for after the workshop. If it lives in the repo or the Ona UI,
-you can ship it in an hour.
 - [`automations.yaml` schema reference](https://ona.com/docs/ona/reference/automations-yaml-schema)
