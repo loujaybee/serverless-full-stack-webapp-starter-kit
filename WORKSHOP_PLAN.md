@@ -5,34 +5,21 @@ a real repo by the end.
 
 ## A note before we start
 
-Automating the SDLC with AI is a new and fast-moving topic. The speakers
-will show you what Ona does today — but today's tools aren't silver
-bullets, and the industry is still figuring out what "good" looks like.
-
-Treat this session as a **joint discussion** as much as a hands-on
-workshop. What works? What's missing? What do your customers need that
-nobody is shipping yet? The goal is to leave with a shared view of where
-this space is, where it's going, and how to help AWS customers navigate
-it.
+Automating the SDLC with AI is fast-moving and unsettled. We'll show you
+what Ona does today — the tools aren't silver bullets, and the industry
+is still figuring out what "good" looks like. Treat this as a joint
+discussion as much as a hands-on workshop: what works, what's missing,
+what your customers need.
 
 ## Objectives
 
 By the end of the hour you should be able to:
 
-- **Understand Ona and automations** — what they are, how they fit into
-  a developer's workflow
-- **Understand the dev-environment connection** — why automations depend
-  on a configured environment, and what breaks when that's wrong
-- **Understand outer-loop SDLC automation** — how agents can handle the
-  work *around* coding (reviews, tests, docs, cleanup) rather than just
-  the coding itself
-- **Understand the limitations** — where this approach falls down today,
-  what requires human judgement, what the industry hasn't solved
-- **Speak clearly to AWS customers** — describe the benefits, the use
-  cases, and the caveats of a solution like Ona, without over-claiming
-
-All of this comes from hands-on learning. You'll design and ship an
-automation, hit real problems, and we'll debrief together.
+- Explain what Ona is and how automations fit into a developer's workflow
+- Explain why automations depend on a configured dev environment
+- Describe what outer-loop SDLC automation means in practice
+- Name where this approach falls down today
+- Pitch Ona to AWS customers without over-claiming
 
 ## The repo
 
@@ -52,21 +39,19 @@ Either way works. Your facilitator will share the URL during the session.
 
 ## What you'll do
 
-1. **Explore (10 min)** — Open the repo in Ona (you'll be invited to the
-   workshop org) and use an **Ona agent** to walk you through the
-   codebase. Ask it: *"What does this app do? Where's the pain? What
-   would you automate?"* Write down three things that look painful to
-   deal with every week.
-2. **Design (15 min)** — Pick one pain. Fill in the canvas below. A
-   facilitator will poke holes in your design before you build.
-3. **Build (20 min)** — Turn the design into a working automation in
+1. **Explore & design (20 min)** — Open the repo in Ona (you'll be
+   invited to the workshop org) and use an **Ona agent** to walk you
+   through the codebase. Ask it: *"What does this app do? Where's the
+   pain? What would you automate?"* Pick one pain and fill in the canvas
+   below. A facilitator will poke holes in your design before you build.
+2. **Build (20 min)** — Turn the design into a working automation in
    Ona. Run it. Iterate.
-4. **Share (5 min)** — 60 seconds to the room:
+3. **Share (15 min)** — Each team takes a couple of minutes to the room:
    - What pain were you solving?
    - What did you build?
    - Did it work?
    - **What limitations or challenges did you hit?** ← the important one
-5. **Debrief (5 min)** — Patterns across teams. What's Ona good at?
+4. **Debrief (5 min)** — Patterns across teams. What's Ona good at?
    What's missing? What would you want to tell your customers? What
    would you want the industry to build next?
 
@@ -168,39 +153,3 @@ If you want to commit your automation so it lives alongside the code
 (and can be reused by your team), there's also an Ona CLI that exports
 the automation as YAML you can PR into the repo. You don't need that
 today — but know it exists.
-
-### Common ways prompts fail
-
-1. **Too vague.** *"Fix the bugs"* isn't a prompt. *"Find Next.js routes
-   without input validation and add Zod schemas"* is.
-2. **No stop condition.** Tell the agent when to stop — after N files,
-   when tests pass, when one endpoint is done.
-3. **No verification.** Give the agent something to check its own work
-   against. *"Run `npm test`. If it fails, revert and report."*
-
-### When you're stuck
-
-- **Stuck in the UI** → grab a facilitator
-- **Stuck on the prompt** → read canvas box 3 aloud; is the prompt doing
-  what those steps say?
-- **Stuck on the environment** → check box 4; does the pre-configured
-  environment actually have what your steps need?
-- **Stuck conceptually** → ask yourself what a junior engineer would
-  need to do this task. Then tell the agent that.
-
----
-
-## Winning
-
-Four awards, decided at the end:
-
-- **Clearest pain** — the canvas item that reads most like a real weekly
-  annoyance
-- **Most creative trigger** — room vote
-- **Best dev-env reasoning** — the team that noticed something the
-  environment couldn't yet support and explained why
-- **Shipped to main** — the team whose automation actually merged a PR
-
-A team whose automation didn't quite run can still win on design. That's
-deliberate — the *limitations* you hit are at least as valuable as the
-wins. Bring them to the debrief.
