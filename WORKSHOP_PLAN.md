@@ -11,15 +11,12 @@ is still figuring out what "good" looks like. Treat this as a joint
 discussion as much as a hands-on workshop: what works, what's missing,
 what your customers need.
 
-## Objectives
+## What you leave with
 
-By the end of the hour you should be able to:
-
-- Explain what Ona is and how automations fit into a developer's workflow
-- Explain why automations depend on a configured dev environment
-- Describe what outer-loop SDLC automation means in practice
-- Name where this approach falls down today
-- Pitch Ona to AWS customers without over-claiming
+- A working Ona automation you built yourself
+- A mental model of how automations compose into a software factory, especially for outer-loop work
+- An instinct for why the dev environment and repo decide whether one holds up
+- A sharper answer when a customer asks where Ona fits and where to start
 
 ## The repo
 
